@@ -1,2 +1,2 @@
-# Asteroids1
+# Asteroids
 
