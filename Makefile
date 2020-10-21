@@ -1,9 +1,9 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++0x -mwindows
-LDFLAGS=-lmingw32 -lSDL2main -lSDL2
+CFLAGS=-c -Wall -std=c++0x
+LDFLAGS=-mwindows -lmingw32 -lopengl32 -lglew32 -lSDL2main -lSDL2 
 SOURCES=$(wildcard *.c *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECTUABLE=oop1
+EXECTUABLE=Asteroids
 
 all: $(SOURCES) $(EXECTUABLE)
 
