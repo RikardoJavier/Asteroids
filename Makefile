@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-c -Wall -std=c++0x
-LDFLAGS=
+CFLAGS=-c -Wall -std=c++0x -mwindows
+LDFLAGS=-lmingw32 -lSDL2main -lSDL2
 SOURCES=$(wildcard *.c *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECTUABLE=oop1
