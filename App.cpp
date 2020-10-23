@@ -1,9 +1,11 @@
 #include "App.hpp"
 #include <iostream>
 #include <algorithm>
+#include "Ship.hpp"
+#include "Asteroid.hpp"
 
 // OpenGL includes
-#include <GL/glew.h>
+//#include <GL/glew.h>//
 #include <SDL2/SDL_opengl.h>
 
 namespace Engine
@@ -21,6 +23,8 @@ namespace Engine
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
+		m_asteroid = new Asteroid;
+		m_ship = new Ship;
 	}
 
 	App::~App()
@@ -29,6 +33,8 @@ namespace Engine
 
         // Removes timer allocation
         delete m_timer;
+		delete m_ship;
+		delete m_asteroid;
 	}
 
 	void App::Execute()
@@ -125,63 +131,10 @@ namespace Engine
 		m_nUpdates++;
 	}
 
-	void App::Render()
+	void App::Render()//Render the ship and my new Asteroid.
 	{
-		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		// glBegin(GL_QUADS);		
-		// 	glVertex2f(50.0, 50.0);
-        //     glVertex2f(50.0, -50.0);
-        //     glVertex2f(-50.0, -50.0);
-        //     glVertex2f(-50.0, 50.0);	
-		// glEnd();
-
-		// glBegin(GL_TRIANGLES);
-		// 	glVertex3f(-50.0, -50.0, 0.0);
-		// 	glVertex3f( 0.0,  50.0, 0.0);
-		// 	glVertex3f( 50.0, -50.0, 0.0);
-		// glEnd();
-
-		// glBegin(GL_LINE_LOOP);
-		// 	glVertex3f(-50.0, -50.0, 0.0);
-		// 	glVertex3f( 0.0,  50.0, 0.0);
-		// 	glVertex3f( 50.0, -50.0, 0.0);
-		// glEnd();
-
-		// glBegin(GL_LINE_LOOP);
-            // glVertex2f(50.0, 50.0);
-            // glVertex2f(50.0, -50.0);
-            // glVertex2f(-50.0, -50.0);
-            // glVertex2f(-50.0, 50.0);			
-		// glEnd();
-
-		glBegin(GL_LINE_LOOP);
-			glVertex2f(0.0, 16.0);//A
-			glVertex2f(-2.0, 12.0);//P
-			glVertex2f( -4.0,  10.0);//B
-			glVertex2f( -4.0, 2.0);//D
-			glVertex2f( -12.0, -2.0);//E
-			glVertex2f(-8.0, -4.0);//F
-			glVertex2f(-4.0, -4.0);//G
-			glVertex2f(-4.0, -8.0);//H
-			glVertex2f(-8.0, -14.0);//I
-			glVertex2f(-4.0, -14.0);//R
-			glVertex2f(-2.0, -12.0);//S
-			glVertex2f(0.0, -14.0);//T
-			glVertex2f(2.0, -12.0);//V
-			glVertex2f(4.0, -14.0);//U
-            glVertex2f(8.0, -14.0);//J
-			glVertex2f(4.0, -8.0);//K
-			glVertex2f(4.0, -4.0);//L
-			glVertex2f(8.0, -4.0);//M
-			glVertex2f(12.0, -2.0);//N
-			glVertex2f(4.0, 2.0);//O
-			glVertex2f( 4.0, 10.0);//C
-			glVertex2f(2.0, 12.0);//Q
-		glEnd();
-
-		SDL_GL_SwapWindow(m_mainWindow);
+		m_ship ->Render();
+		m_asteroid->Render();
 	}
 
 	bool App::SDLInit()

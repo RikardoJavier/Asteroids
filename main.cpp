@@ -9,6 +9,7 @@ const int HEIGHT = 640;
 
 int main(int argc, char ** argv)
 {
+
 	// Create Game Object
 	//
 	Engine::App* app = new Engine::App("Asteroids", WIDTH, HEIGHT);
@@ -23,11 +24,13 @@ int main(int argc, char ** argv)
 
 	// Execute game
 	//
+	app->Render();
 	app->Execute();
 
 	// Delete game object
 	//
 	delete app;
+	
 
 	return 0;
 }
