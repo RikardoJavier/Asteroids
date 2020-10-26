@@ -6,6 +6,8 @@ namespace Engine
       class Ship
 {
      public:
+     Ship();
+     ~Ship();
       void Render();
 };
 }

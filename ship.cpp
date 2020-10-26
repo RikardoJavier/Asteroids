@@ -5,6 +5,14 @@
 
 namespace Engine
 {
+	Ship::Ship()//Constructor de la nave
+	{
+
+	}
+	Ship::~Ship()//Destructor
+	{
+
+	}
 void Ship::Render()
     {
 	

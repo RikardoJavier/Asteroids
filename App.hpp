@@ -17,7 +17,6 @@ namespace Engine
     class App : public SDLEvent
     {
         class Ship;
-        class Asteroid;
         public:
             /* =============================================================
             * ENUMERATORS
