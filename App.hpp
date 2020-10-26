@@ -2,9 +2,6 @@
 
 #ifndef APP_HPP
 #define APP_HPP
-class Ship;
-class Asteroid;
-
 // C++ STL
 #include <string>
 #include <list>
@@ -12,12 +9,15 @@ class Asteroid;
 //
 #include "SDLEvents.hpp"
 #include "TimeManager.hpp"
+#include "Ship.hpp"
 
 
 namespace Engine
 {
     class App : public SDLEvent
     {
+        class Ship;
+        class Asteroid;
         public:
             /* =============================================================
             * ENUMERATORS
@@ -74,8 +74,7 @@ namespace Engine
 		    SDL_GLContext		 m_context;
 		    GameState::State	 m_state;
             Engine::TimeManager* m_timer;
-            Ship* m_ship;
-            Asteroid* m_asteroid;
+            Engine::Ship*        m_ship;
     };
 }
 

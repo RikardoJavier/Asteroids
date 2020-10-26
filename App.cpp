@@ -2,8 +2,6 @@
 #include <iostream>
 #include <algorithm>
 #include "Ship.hpp"
-#include "Asteroid.hpp"
-
 // OpenGL includes
 //#include <GL/glew.h>//
 #include <SDL2/SDL_opengl.h>
@@ -23,7 +21,6 @@ namespace Engine
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
-		m_asteroid = new Asteroid;
 		m_ship = new Ship;
 	}
 
@@ -34,7 +31,7 @@ namespace Engine
         // Removes timer allocation
         delete m_timer;
 		delete m_ship;
-		delete m_asteroid;
+
 	}
 
 	void App::Execute()
@@ -137,7 +134,6 @@ namespace Engine
 		glClear(GL_COLOR_BUFFER_BIT);
 		SDL_GL_SwapWindow(m_mainWindow);
 		m_ship ->Render();
-		m_asteroid->Render();
 	}
 
 	bool App::SDLInit()
