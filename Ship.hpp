@@ -1,13 +1,13 @@
 #pragma once
-#include <iostream>
-#include <gl\gl.h>
-#ifndef _Ship_HPP_
+#ifndef Ship_HPP_
+#define Ship_HPP_
 namespace Engine
-}
-class Ship
+{
+      class Ship
 {
      public:
       void Render();
 };
-} 
-#endif;
+}
+
+#endif

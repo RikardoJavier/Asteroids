@@ -133,6 +133,9 @@ namespace Engine
 
 	void App::Render()//Render the ship and my new Asteroid.
 	{
+		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		SDL_GL_SwapWindow(m_mainWindow);
 		m_ship ->Render();
 		m_asteroid->Render();
 	}

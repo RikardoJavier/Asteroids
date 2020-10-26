@@ -1,11 +1,13 @@
 #include <iostream>
 #include <SDL2\SDL.h>
-#include <gl\gl.h>
+#include <GL\gl.h>
 #include "Ship.hpp"
+
+namespace Engine
+{
 void Ship::Render()
     {
-		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	
         glBegin(GL_LINE_LOOP);
 			glVertex2f(0.0, 16.0);//A
 			glVertex2f(-2.0, 12.0);//P
@@ -30,7 +32,6 @@ void Ship::Render()
 			glVertex2f( 4.0, 10.0);//C
 			glVertex2f(2.0, 12.0);//Q
 		glEnd();
-
-		SDL_GL_SwapWindow(m_mainWindow);
      
     }
+}
