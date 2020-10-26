@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL2\SDL.h>
+#include <GL>
 #include "Ship.hpp"
 void Ship::Render()
     {

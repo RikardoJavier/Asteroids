@@ -52,8 +52,7 @@ namespace Engine
             /* =============================================================
             * PRIVATE FUNCTIONS
             * ============================================================= */
-            Ship*m_ship;
-            Asteroid*m_asteroid;
+           
             bool SDLInit         ( );
             bool GlewInit        ( );
             void SetupViewPort   ( );
@@ -75,6 +74,8 @@ namespace Engine
 		    SDL_GLContext		 m_context;
 		    GameState::State	 m_state;
             Engine::TimeManager* m_timer;
+            Ship* m_ship;
+            Asteroid* m_asteroid;
     };
 }
 
