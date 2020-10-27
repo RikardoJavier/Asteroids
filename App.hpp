@@ -14,9 +14,10 @@
 
 namespace Engine
 {
+     class Ship;
     class App : public SDLEvent
     {
-        class Ship;
+       
         public:
             /* =============================================================
             * ENUMERATORS
