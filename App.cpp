@@ -1,9 +1,8 @@
 #include "App.hpp"
-#include <iostream>
 #include <algorithm>
 #include "Ship.hpp"
 // OpenGL includes
-//#include <GL/glew.h>//
+//#include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
 namespace Engine
@@ -38,7 +37,7 @@ namespace Engine
 	{
 		if (m_state != GameState::INIT_SUCCESSFUL)
 		{
-			std::cerr << "Game INIT was not successful." << std::endl;
+			SDL_Log("Game INIT was not successful.");
 			return;
 		}
 
@@ -96,7 +95,19 @@ namespace Engine
 	{
 		switch (keyBoardEvent.keysym.scancode)
 		{
-		case SDL_SCANCODE_ESCAPE:
+			case SDL_SCANCODE_W:
+			SDL_Log("Going up");
+			break;
+			case SDL_SCANCODE_A:
+			SDL_Log("Going left");
+			break;
+			case SDL_SCANCODE_S:
+			SDL_Log("Going Down");
+			break;
+			case SDL_SCANCODE_D:
+			SDL_Log("Going Right");
+			break;
+		case SDL_SCANCODE_ESCAPE://clouse if u press space.
 			OnExit();
 			break;
 		default:
@@ -142,7 +153,7 @@ namespace Engine
 		//
 		if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		{
-			std::cerr << "Failed to init SDL" << std::endl;
+			SDL_Log("Failed to init SDL");
 			return false;
 		}
 
@@ -164,7 +175,7 @@ namespace Engine
 
 		if (!m_mainWindow)
 		{
-			std::cerr << "Failed to create window!" << std::endl;
+			SDL_Log("Failed to create window!");
 			SDL_Quit();
 			return false;
 		}

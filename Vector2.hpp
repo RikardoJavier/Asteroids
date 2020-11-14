@@ -1,19 +1,26 @@
 #include <iostream>
-
-class Vector2
+namespace Math
 {
-    public:
-        Vector2(float _x, float _y) :
-            x(_x),
-            y(_y)
-        {}
+    struct Vector2
+    {
+        //Static
+        static Vector2 Origin;
+        //Static
 
-        void print()
-        {
-            std::cout << "(x, y) => " << x << ", " << y << std::endl;
-        }
+        //Constructor
+        Vector2();
+        Vector2(float, float);
+        Vector2(float);
+        //Cosntructor
 
-    private:
+        //Funciones
+       float Length() const;
+       float SquaredLeth () const;
+       float Narmalize();
+
+        //Cnstructor
         float x;
         float y;
-};
+        float length;
+    };
+} // namespace Math
