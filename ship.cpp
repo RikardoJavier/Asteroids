@@ -41,7 +41,7 @@ namespace Engine
 			glVertex2f(4.0, -8.0);	 //K
 			glVertex2f(4.0, -4.0);	 //L
 			glVertex2f(8.0, -4.0);	 //M
-			glVertex2f(12.0, -2.0);	 //N
+			glVertex2f (12.0, -2.0);	 //N
 			glVertex2f(4.0, 2.0);	 //O
 			glVertex2f(4.0, 10.0);	 //C
 			glVertex2f(2.0, 12.0);	 //Q
