@@ -1,26 +1,29 @@
 #include <iostream>
-namespace Math
+namespace Engine
 {
-    struct Vector2
+    namespace Math
     {
-        //Static
-        static Vector2 Origin;
-        //Static
+        struct Vector2
+        {
+            //Static
+            static Vector2 Origin;
+            //Static
 
-        //Constructor
-        Vector2();
-        Vector2(float, float);
-        Vector2(float);
-        //Cosntructor
+            //Constructor
+            Vector2();
+            Vector2(float, float);
+            Vector2(float);
+            //Cosntructor
 
-        //Funciones
-       float Length() const;
-       float SquaredLeth () const;
-       float Narmalize();
+            //Funciones
+            float Length() const;
+            float SquaredLeth() const;
+            float Normalize();
 
-        //Cnstructor
-        float x;
-        float y;
-        float length;
-    };
-} // namespace Math
+            //Cnstructor
+            float x;
+            float y;
+            float length;
+        };
+    } // namespace Math
+} // namespace Engine

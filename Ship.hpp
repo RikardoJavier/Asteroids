@@ -7,16 +7,17 @@ namespace Engine
       class Ship
       {
       public:
-      //Constructor.
+            //Constructor.
             Ship();
-            Ship(float,float);
+            Ship(float, float);
             ~Ship();
-      //Public Funcion.
+            //Public Funcion.
+            void Ship::Move(float x, float y);
             void Render();
 
       private:
-      //members.
-           Engine::Math::Vector2 m_position;
+            //members.
+            Engine::Math::Vector2 m_position;
       };
 } // namespace Engine
 

@@ -93,19 +93,24 @@ namespace Engine
 
 	void App::OnKeyUp(SDL_KeyboardEvent keyBoardEvent)
 	{
+		const float Move_Unit = 25.0f;
 		switch (keyBoardEvent.keysym.scancode)
 		{
 			case SDL_SCANCODE_W:
 			SDL_Log("Going up");
+			m_ship ->Move(0.0f,Move_Unit);
 			break;
 			case SDL_SCANCODE_A:
 			SDL_Log("Going left");
+			m_ship ->Move(- Move_Unit,0.0f);
 			break;
 			case SDL_SCANCODE_S:
 			SDL_Log("Going Down");
+			m_ship ->Move(0.0f,- Move_Unit);
 			break;
 			case SDL_SCANCODE_D:
 			SDL_Log("Going Right");
+			m_ship ->Move(Move_Unit,0.0f);
 			break;
 		case SDL_SCANCODE_ESCAPE://clouse if u press space.
 			OnExit();
