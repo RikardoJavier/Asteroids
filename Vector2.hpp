@@ -1,26 +1,34 @@
+#pragma once
 #include <iostream>
+
 namespace Engine
 {
     namespace Math
     {
         struct Vector2
         {
-            //Static
+            /* ==========================
+            * STATIC
+            * ==========================*/
             static Vector2 Origin;
-            //Static
 
-            //Constructor
+            /* ==========================
+            * CONSTRUCTORS
+            * ==========================*/
             Vector2();
             Vector2(float, float);
             Vector2(float);
-            //Cosntructor
 
-            //Funciones
+            /* ==========================
+            * FUNCTIONS
+            * ==========================*/
             float Length() const;
-            float SquaredLeth() const;
+            float SquaredLength() const;
             float Normalize();
 
-            //Cnstructor
+            /* ==========================
+            * CONSTRUCTORS
+            * ==========================*/
             float x;
             float y;
             float length;

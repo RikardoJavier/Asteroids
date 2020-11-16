@@ -1,14 +1,18 @@
 #include "App.hpp"
 #include <algorithm>
-#include "Ship.hpp"
+
 // OpenGL includes
-//#include <GL/glew.h>
+#include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 
+//
+#include "Ship.hpp"
+#include "Asteroid.hpp"
+
 namespace Engine
-{
+{	
 	const float DESIRED_FRAME_RATE = 60.0f;
-	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
+	const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;	
 
 	App::App(const std::string& title, const int width, const int height)
 		: m_title(title)
@@ -20,7 +24,9 @@ namespace Engine
 	{
 		m_state = GameState::UNINITIALIZED;
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
-		m_ship = new Ship;
+
+		m_ship = new Engine::Ship(this);
+		// m_asteroid = new Asteroid;
 	}
 
 	App::~App()
@@ -29,8 +35,12 @@ namespace Engine
 
         // Removes timer allocation
         delete m_timer;
+
+		// Removes ship allocation
 		delete m_ship;
 
+		// Removes asteroid
+		// delete m_asteroid;
 	}
 
 	void App::Execute()
@@ -67,6 +77,7 @@ namespace Engine
 		if (!success)
 		{
 			m_state = GameState::INIT_FAILED;
+			SDL_Log("Game INIT failed.");
 			return false;
 		}
 
@@ -82,10 +93,25 @@ namespace Engine
 	}
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
-	{		
+	{
+		const float MOVE_UNIT = 15.f;
 		switch (keyBoardEvent.keysym.scancode)
 		{
-		default:			
+		case SDL_SCANCODE_W:
+			SDL_Log("Going up");	
+			m_ship->MoveUp();	
+			break;
+		case SDL_SCANCODE_A:
+			SDL_Log("Going left");
+			m_ship->RotateLeft(DESIRED_FRAME_TIME);
+			break;
+		case SDL_SCANCODE_S:			
+			break;
+		case SDL_SCANCODE_D:
+			SDL_Log("Going right");
+			m_ship->RotateRight(DESIRED_FRAME_TIME);
+			break;
+		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
 			break;
 		}
@@ -93,26 +119,9 @@ namespace Engine
 
 	void App::OnKeyUp(SDL_KeyboardEvent keyBoardEvent)
 	{
-		const float Move_Unit = 25.0f;
 		switch (keyBoardEvent.keysym.scancode)
 		{
-			case SDL_SCANCODE_W:
-			SDL_Log("Going up");
-			m_ship ->Move(0.0f,Move_Unit);
-			break;
-			case SDL_SCANCODE_A:
-			SDL_Log("Going left");
-			m_ship ->Move(- Move_Unit,0.0f);
-			break;
-			case SDL_SCANCODE_S:
-			SDL_Log("Going Down");
-			m_ship ->Move(0.0f,- Move_Unit);
-			break;
-			case SDL_SCANCODE_D:
-			SDL_Log("Going Right");
-			m_ship ->Move(Move_Unit,0.0f);
-			break;
-		case SDL_SCANCODE_ESCAPE://clouse if u press space.
+		case SDL_SCANCODE_ESCAPE:
 			OnExit();
 			break;
 		default:
@@ -127,6 +136,7 @@ namespace Engine
 
 		// Update code goes here
 		//
+		m_ship->Update(DESIRED_FRAME_TIME);
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
@@ -137,19 +147,21 @@ namespace Engine
 			endTime = m_timer->GetElapsedTimeInSeconds();
 		}
 
-		//double elapsedTime = endTime - startTime;        
-
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
 		m_nUpdates++;
 	}
 
-	void App::Render()//Render the ship and my new Asteroid.
+	void App::Render()
 	{
 		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		SDL_GL_SwapWindow(m_mainWindow);
+
+		// Render code goes here
 		m_ship->Render();
+		// m_asteroid->Render();
+		
+		SDL_GL_SwapWindow(m_mainWindow);
 	}
 
 	bool App::SDLInit()

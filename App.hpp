@@ -2,6 +2,7 @@
 
 #ifndef APP_HPP
 #define APP_HPP
+
 // C++ STL
 #include <string>
 #include <list>
@@ -9,15 +10,13 @@
 //
 #include "SDLEvents.hpp"
 #include "TimeManager.hpp"
-#include "Ship.hpp"
-
 
 namespace Engine
 {
-     class Ship;
+    class Ship;
+    class Asteroid;
     class App : public SDLEvent
     {
-       
         public:
             /* =============================================================
             * ENUMERATORS
@@ -48,11 +47,12 @@ namespace Engine
             bool Init            ( );
             void Update          ( );
             void Render          ( );
+            int  GetWidth        ( ) { return m_width; }
+            int  GetHeight       ( ) { return m_height; }
         private:
             /* =============================================================
             * PRIVATE FUNCTIONS
             * ============================================================= */
-           
             bool SDLInit         ( );
             bool GlewInit        ( );
             void SetupViewPort   ( );
@@ -75,6 +75,7 @@ namespace Engine
 		    GameState::State	 m_state;
             Engine::TimeManager* m_timer;
             Engine::Ship*        m_ship;
+            Engine::Asteroid*    m_asteroid;
     };
 }
 

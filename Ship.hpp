@@ -12,7 +12,8 @@ namespace Engine
             Ship(float, float);
             ~Ship();
             //Public Funcion.
-            void Ship::Move(float x, float y);
+            void Move(float x, float y);
+            
             void Render();
 
       private:

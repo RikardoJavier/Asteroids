@@ -1,76 +1,143 @@
-#include <iostream>
-#include <SDL2\SDL.h>
-#include <GL\gl.h>
 #include "Ship.hpp"
-#include "Vector2.hpp"
+#include "App.hpp"
+
+#include <gl\GL.h>
+
+// STL
+#include <iostream>
+#include <cmath>
+
 namespace Engine
 {
-	namespace Math
-	{
-		inline float wrap (float x, float min, float max)
-		{
-			if (x<min) return max - (min - x);// si la nave sale del ancho, regresa al valor min y se le resta a X, para colocarse en su nueva posicion.
-			if (x>max) return min - (x- max);
-			return x;
-		}
-		Ship::Ship() //Constructor de la nave
-			: m_position(Math::Vector2::Origin)
-		{
-			std::cout<<"Construyendo la nave";
-		}
-		Ship::Ship(float _x, float _y)
-			: m_position(_x, _y)
-		{
-		}
-		Ship::~Ship() //Destructor
-		{
-			std::cout<<"Construyendo la nave";
-		}
-		void Ship::Move(float _x, float _y)
-		{
-			float x = m_position.x + _x;
-			float y = m_position.y + _y;
-			float width = 1136.0f;
-			float heigth = 640.0f;
-			//Ancho
-			float min_width = -width/ 2.0f;
-			float max_width = width/2.0f;
-			//altura
-			float min_heigth = -heigth/ 2.0f;
-			float max_heigth = heigth/ 2.0f;
+    // TODO: RR: Move this to a lib
+    const float PI = 3.141592653;
+    const float MAX_VELOCITY = 500.0f;
+    const float THRUST = 15.0f;
+    const float DRAG_FORCE = 0.999f;
+    const float ANGLE_OFFSET = 90.0f;
 
-			m_position.x = wrap(x,min_width,max_width);
-			m_position.y = wrap(y,min_heigth,max_heigth);
+    // TODO: RR: Get this out of here!
+    inline float wrap(float x, float min, float max)
+    {
+        if(x < min) return max - (min - x);
+        if(x > max) return min + (x - max);
+        return x;
+    }
 
-		}
-		void Ship::Render()
-		{
-			glLoadIdentity();
-			glTranslatef(m_position.x, m_position.y, 0.0);
-			glBegin(GL_LINE_LOOP);
-			glVertex2f(0.0, 16.0);	 //A
-			glVertex2f(-2.0, 12.0);	 //P
-			glVertex2f(-4.0, 10.0);	 //B
-			glVertex2f(-4.0, 2.0);	 //D
-			glVertex2f(-12.0, -2.0); //E
-			glVertex2f(-8.0, -4.0);	 //F
-			glVertex2f(-4.0, -4.0);	 //G
-			glVertex2f(-4.0, -8.0);	 //H
-			glVertex2f(-8.0, -14.0); //I
-			glVertex2f(-4.0, -14.0); //R
-			glVertex2f(-2.0, -12.0); //S
-			glVertex2f(0.0, -14.0);	 //T
-			glVertex2f(2.0, -12.0);	 //V
-			glVertex2f(4.0, -14.0);	 //U
-			glVertex2f(8.0, -14.0);	 //J
-			glVertex2f(4.0, -8.0);	 //K
-			glVertex2f(4.0, -4.0);	 //L
-			glVertex2f(8.0, -4.0);	 //M
-			glVertex2f(12.0, -2.0);	 //N
-			glVertex2f(4.0, 2.0);	 //O
-			glVertex2f(4.0, 10.0);	 //C
-			glVertex2f(2.0, 12.0);	 //Q
-			glEnd();
-		}
-	} // namespace Math
+    Ship::Ship(App* parent)
+        : m_position(Math::Vector2::Origin)   
+        , m_velocity(Math::Vector2::Origin)  
+        , m_angle(0.0f)     
+        , m_rotation(250.0f)
+        , m_mass(1.0f)
+        , m_parent(parent) // TODO: RR: Contemplate using a component based design approach
+    {        
+        std::cout << "Construction of ship\n";
+        ChangeShip();
+    }
+
+    Ship::Ship(App* parent, float _x, float _y)
+        : m_position(_x, _y)    
+        , m_velocity(Math::Vector2::Origin)  
+        , m_angle(0.0f)     
+        , m_rotation(250.0f)
+        , m_mass(1.0f)    
+        , m_parent(parent)
+    {
+        std::cout << "Construction of ship\n";
+    }
+
+    Ship::~Ship()
+    {
+        std::cout << "Destruction of ship\n";
+    }
+
+    void Ship::MoveUp()
+    {
+        ApplyImpulse(Math::Vector2(THRUST));
+    }
+
+    void Ship::RotateLeft( float deltaTime )
+    {        
+        m_angle += m_rotation * deltaTime;
+    }
+
+    void Ship::RotateRight( float deltaTime )
+    {        
+        m_angle -= m_rotation * deltaTime;
+    }
+
+    void Ship::ApplyDrag(Math::Vector2 force)
+    {
+        m_velocity.x *= force.x;
+        m_velocity.y *= force.y;
+    }
+
+    void Ship::ApplyImpulse(Math::Vector2 impulse)
+    {
+        if(m_mass > 0)
+        {
+            m_velocity.x += (impulse.x / m_mass) * cosf((m_angle + ANGLE_OFFSET) * (PI / 180));
+            m_velocity.y += (impulse.y / m_mass) * sinf((m_angle + ANGLE_OFFSET) * (PI / 180));
+        }
+    }
+
+    void Ship::Update(float deltaTime)
+    {
+        // Calculate speed
+        float speed = 
+            std::fabs(m_velocity.Length());
+
+        // Cap speed
+        if(speed > MAX_VELOCITY)
+        {
+            m_velocity.x = (m_velocity.x / speed) * MAX_VELOCITY;
+            m_velocity.y = (m_velocity.y / speed) * MAX_VELOCITY;
+        }
+
+        // Set new state
+        m_currentSpeed = speed;
+        m_position.x += m_velocity.x * deltaTime;
+        m_position.y += m_velocity.y * deltaTime;
+
+        // Applies drag
+        ApplyDrag(Math::Vector2(DRAG_FORCE));
+
+        // Calculations for wrap around
+        // TODO: RR: Create a parent class to handle this for all rendered entities
+        float halfWidth = m_parent->GetWidth() / 2.0f;
+        float halfHeight = m_parent->GetHeight() / 2.0f;
+
+        float worldMinX = -halfWidth;
+        float worldMaxX = halfWidth;
+
+        float worldMinY = -halfHeight;
+        float worldMaxY = halfHeight;
+
+        m_position.x = wrap(m_position.x, worldMinX, worldMaxX);
+        m_position.y = wrap(m_position.y, worldMinY, worldMaxY);
+    }
+
+    void Ship::ChangeShip()
+    {
+        m_points.push_back(Math::Vector2(0.0f, 20.0f));
+		m_points.push_back(Math::Vector2(12.0f, -10.0f));
+		m_points.push_back(Math::Vector2(6.0f, -4.0f));
+		m_points.push_back(Math::Vector2(-6.0f, -4.0f));
+		m_points.push_back(Math::Vector2(-12.0f, -10.0f));
+    }
+
+    void Ship::Render()
+    {
+        glLoadIdentity();
+        glTranslatef(m_position.x, m_position.y, 0.0);
+        glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+        glBegin(GL_LINE_LOOP);
+            std::vector<Math::Vector2>::iterator it = m_points.begin();
+            for(; it != m_points.end(); ++it)
+            {
+                glVertex2f((*it).x, (*it).y);
+            }
+        glEnd();
+    }
 } // namespace Engine

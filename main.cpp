@@ -9,10 +9,9 @@ const int HEIGHT = 640;
 
 int main(int argc, char ** argv)
 {
-
 	// Create Game Object
 	//
-	Engine::App* app = new Engine::App("Asteroids", WIDTH, HEIGHT);
+	Engine::App* app = new Engine::App("Asteroids", WIDTH, HEIGHT);	
 
 	// Initialize game
 	//
@@ -20,17 +19,15 @@ int main(int argc, char ** argv)
 	{
 		std::cout << "App Init error!\n";
 		return -1;
-	}
+	}	
 
 	// Execute game
 	//
-	app->Render();
 	app->Execute();
 
 	// Delete game object
 	//
 	delete app;
-	
 
 	return 0;
 }
