@@ -9,14 +9,12 @@
 
 namespace Engine
 {
-    // TODO: RR: Move this to a lib
     const float PI = 3.141592653;
     const float MAX_VELOCITY = 500.0f;
     const float THRUST = 15.0f;
     const float DRAG_FORCE = 0.999f;
     const float ANGLE_OFFSET = 90.0f;
 
-    // TODO: RR: Get this out of here!
     inline float wrap(float x, float min, float max)
     {
         if (x < min)
@@ -96,7 +94,6 @@ namespace Engine
         ApplyDrag(Math::Vector2(DRAG_FORCE));
 
         // Calculations for wrap around
-        // TODO: RR: Create a parent class to handle this for all rendered entities
         float halfWidth = m_parent->GetWidth() / 2.0f;
         float halfHeight = m_parent->GetHeight() / 2.0f;
 
