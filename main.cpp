@@ -1,6 +1,7 @@
 // C++ STL
 #include <iostream>
-
+#ifndef Version_
+#define Version_ "Version - 0.4.0"
 // 
 #include "App.hpp"
 
@@ -9,6 +10,8 @@ const int HEIGHT = 640;
 
 int main(int argc, char ** argv)
 {
+	//Create Tag Version
+	std::cout<<Version_<<"n";
 	// Create Game Object
 	//
 	Engine::App* app = new Engine::App("Asteroids", WIDTH, HEIGHT);	
@@ -31,3 +34,4 @@ int main(int argc, char ** argv)
 
 	return 0;
 }
+#endif
