@@ -1,7 +1,7 @@
 // C++ STL
 #include <iostream>
 #ifndef Version_
-#define Version_ "Version - 0.4.0"
+#define Version_ "Version - 0.4.0 -"
 // 
 #include "App.hpp"
 
