@@ -3,7 +3,8 @@
 
 // 
 #include "App.hpp"
-
+#ifdef Version_
+#define Version_ "Version - 0.4.0"
 const int WIDTH = 1136;
 const int HEIGHT = 640;
 
@@ -31,3 +32,4 @@ int main(int argc, char ** argv)
 
 	return 0;
 }
+#endif
