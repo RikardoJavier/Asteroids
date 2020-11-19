@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 
 namespace Engine
 {
@@ -25,10 +24,10 @@ namespace Engine
             float Length() const;
             float SquaredLength() const;
             float Normalize();
-
             /* ==========================
             * CONSTRUCTORS
             * ==========================*/
+           static constexpr float PI=3.141592653;
             float x;
             float y;
             float length;

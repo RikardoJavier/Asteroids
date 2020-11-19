@@ -1,28 +1,18 @@
 #include "Ship.hpp"
 #include "App.hpp"
-
+#include "Vector2.hpp"
+#include "Wrapping.hpp"
 #include <gl\GL.h>
-
 // STL
 #include <iostream>
 #include <cmath>
-
 namespace Engine
 {
-    const float PI = 3.141592653;
     const float MAX_VELOCITY = 500.0f;
     const float THRUST = 15.0f;
     const float DRAG_FORCE = 0.999f;
     const float ANGLE_OFFSET = 90.0f;
 
-    inline float wrap(float x, float min, float max)
-    {
-        if (x < min)
-            return max - (min - x);
-        if (x > max)
-            return min + (x - max);
-        return x;
-    }
 
     Ship::Ship(App *parent)
         : m_position(Math::Vector2::Origin), m_velocity(Math::Vector2::Origin), m_angle(0.0f), m_rotation(250.0f), m_mass(1.0f), m_parent(parent) // TODO: RR: Contemplate using a component based design approach
@@ -67,8 +57,8 @@ namespace Engine
     {
         if (m_mass > 0)
         {
-            m_velocity.x += (impulse.x / m_mass) * cosf((m_angle + ANGLE_OFFSET) * (PI / 180));
-            m_velocity.y += (impulse.y / m_mass) * sinf((m_angle + ANGLE_OFFSET) * (PI / 180));
+            m_velocity.x += (impulse.x / m_mass) * cosf((m_angle + ANGLE_OFFSET) * (Math::Vector2::PI / 180));
+            m_velocity.y += (impulse.y / m_mass) * sinf((m_angle + ANGLE_OFFSET) * (Math::Vector2::PI / 180));
         }
     }
 
@@ -103,8 +93,8 @@ namespace Engine
         float worldMinY = -halfHeight;
         float worldMaxY = halfHeight;
 
-        m_position.x = wrap(m_position.x, worldMinX, worldMaxX);
-        m_position.y = wrap(m_position.y, worldMinY, worldMaxY);
+        m_position.x = Engine::wrap(m_position.x, worldMinX, worldMaxX);
+        m_position.y = Engine::wrap(m_position.y, worldMinY, worldMaxY);
     }
 
     void Ship::ChangeShip()
