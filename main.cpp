@@ -5,8 +5,8 @@
 // 
 #include "App.hpp"
 
-const int WIDTH = 1136;
-const int HEIGHT = 640;
+const int WIDTH = 1200;
+const int HEIGHT = 840;
 
 int main(int argc, char ** argv)
 {
