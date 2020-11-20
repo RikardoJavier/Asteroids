@@ -32,6 +32,7 @@ namespace Engine
             float x;
             float y;
             float length;
+            static constexpr float PI = 3.141592653;
         };
     } // namespace Math
 } // namespace Engine

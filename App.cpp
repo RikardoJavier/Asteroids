@@ -94,7 +94,7 @@ namespace Engine
 
 	void App::OnKeyDown(SDL_KeyboardEvent keyBoardEvent)
 	{
-		const float MOVE_UNIT = 15.f;
+		const float MOVE_UNIT = 25.f;
 		switch (keyBoardEvent.keysym.scancode)
 		{
 		case SDL_SCANCODE_W:
@@ -110,6 +110,12 @@ namespace Engine
 		case SDL_SCANCODE_D:
 			SDL_Log("Going right");
 			m_ship->RotateRight(DESIRED_FRAME_TIME);
+			break;
+		case SDL_SCANCODE_M:
+			m_ship -> ChangeShip();
+			break;
+			case SDL_SCANCODE_P:
+			m_ship ->Restart();
 			break;
 		default:
 			SDL_Log("%S was pressed.", keyBoardEvent.keysym.scancode);
