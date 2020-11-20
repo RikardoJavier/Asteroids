@@ -35,8 +35,10 @@ namespace Engine
 
         // Removes timer allocation
         delete m_timer;
+
 		// Removes ship allocation
 		delete m_ship;
+
 		// Removes asteroid
 		// delete m_asteroid;
 	}
