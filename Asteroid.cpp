@@ -1,4 +1,5 @@
 #include "Asteroid.hpp"
+#include "Vector2.hpp"
 
 #include <gl\GL.h>
 #include <cmath>
@@ -10,9 +11,6 @@ namespace Engine
     const float MIN_SIZE = 25.0f;
     const float MAX_SIZE = 45.0f;
 
-    // Move this out to a Math 
-    const float PI = 3.141592653;
-
     Asteroid::Asteroid()
     {
         float sizeFactor = 1;
@@ -21,11 +19,11 @@ namespace Engine
 
         for(size_t idx = 0; idx < NUM_POINTS; ++idx)
         {
-            const float radians = (idx / static_cast<float>(NUM_POINTS)) * 2.0f * PI;
+            const float radians = (idx / static_cast<float>(NUM_POINTS)) * 2.0f * Engine::Math::Vector2::PI;
             const float randDist = min + (max - min) * (rand() / static_cast<float>(RAND_MAX));
 
             m_points.push_back(Engine::Math::Vector2(sinf(radians) * randDist,
-                                                     cosf(radians) * randDist));
+                                                     cosf(radians) * randDist)); 
         }
     }
 
