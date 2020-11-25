@@ -98,6 +98,7 @@ namespace Engine
     {
         m_NewShip2 = ++m_NewShip2 %2;
         m_points.clear();
+        
         switch (m_NewShip2)
         {
         case 1:
@@ -140,14 +141,26 @@ namespace Engine
             glLoadIdentity();
             glTranslatef(m_position.x, m_position.y, 0.0);
             glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
+            glBegin(GL_POLYGON);
+            glColor3f (0.0, 1.0, 0.0);
+            glVertex3f (0.25, 0.25, 0.0);
+            glVertex3f (0.75, 0.25, 0.0);
+            glColor3f (1.0, 0.0, 0.0);
+            glVertex3f (0.75, 0.75, 0.0);
+            glVertex3f (0.25, 0.75, 0.0);
             glBegin(GL_LINE_LOOP);
             std::vector<Math::Vector2>::iterator it = m_points.begin();
             for (; it != m_points.end(); ++it)
             {
                 glVertex2f((*it).x, (*it).y);
             }
-            glEnd();
+            
+         glEnd();
+            
         }
+            
+            
+            //Restarting ship in his beging.
             void Ship::Restart()
     {
         glLoadIdentity();
