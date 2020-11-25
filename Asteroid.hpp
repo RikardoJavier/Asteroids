@@ -8,15 +8,34 @@
 
 #include "Vector2.hpp"
 
+
 namespace Engine
 {
+    class App;
     class Asteroid
     {
         public:
-            Asteroid();
+            Asteroid(App* parent);
+            void Update(float deltaTime);
             void Render();
+            
         private:
-            std::vector<Engine::Math::Vector2> m_points;
+            
+        /* ==========================
+        * PRIVATE FUNCTIONS
+        * ==========================*/
+         std::vector<Engine::Math::Vector2> m_points;
+         void ApplyImpulse(Engine::Math::Vector2 impulse);
+         /* ==========================
+        * PRIVATE MEMBERS
+        * ==========================*/
+        float m_angle;
+        float m_mass;
+        float m_rotation;
+         Engine::Math::Vector2 m_position;
+        Engine::Math::Vector2 m_velocity;
+        App* m_parent; 
+
     };
 } // namespace Engine
 #endif

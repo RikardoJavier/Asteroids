@@ -14,6 +14,9 @@ namespace Engine
             return min + (x - max);
         return x;
     }
+    /* ==========================
+        * MEMBERS
+     * ==========================*/
     
     static constexpr float MAX_VELOCITY = 500.0f;
     static constexpr float THRUST = 15.0f;

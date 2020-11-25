@@ -26,7 +26,8 @@ namespace Engine
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
 		m_ship = new Engine::Ship(this);
-		// m_asteroid = new Asteroid;
+		m_asteroid = new Engine::Asteroid(this);
+		
 	}
 
 	App::~App()
@@ -40,7 +41,7 @@ namespace Engine
 		delete m_ship;
 
 		// Removes asteroid
-		// delete m_asteroid;
+		 delete m_asteroid;
 	}
 
 	void App::Execute()
@@ -143,6 +144,7 @@ namespace Engine
 		// Update code goes here
 		//
 		m_ship->Update(DESIRED_FRAME_TIME);
+		m_asteroid->Update(DESIRED_FRAME_TIME);
 
 		double endTime = m_timer->GetElapsedTimeInSeconds();
 		double nextTimeFrame = startTime + DESIRED_FRAME_TIME;
@@ -160,12 +162,13 @@ namespace Engine
 
 	void App::Render()
 	{
-		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		
 		// Render code goes here
 		m_ship->Render();
-		// m_asteroid->Render();
+		m_asteroid->Render();
+		
 		
 		SDL_GL_SwapWindow(m_mainWindow);
 	}
