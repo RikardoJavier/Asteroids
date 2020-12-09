@@ -1,16 +1,10 @@
 #include <iostream>
-<<<<<<< HEAD
 
 //include new version
 
 #define release "0.4.0";
 
 //
-=======
-#ifndef Version_
-#define Version_ "Version - 0.4.0 -"
-// 
->>>>>>> Development
 #include "App.hpp"
 
 const int WIDTH = 1136;
