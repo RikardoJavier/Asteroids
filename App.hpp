@@ -91,7 +91,7 @@ namespace Engine
         GameState::State m_state;
         Engine::TimeManager *m_timer;
         Engine::Ship *m_ship;
-        Engine::Ship *m_current_Ship;
+        Engine::Ship *m_NewShip2;
         std::list<Engine::GameObject *> m_objects;
         std::list<Engine::Bullet *> m_bullets;
         std::list<Engine::Asteroid *> m_asteroids;

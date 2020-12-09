@@ -50,6 +50,7 @@ namespace Engine
 
 	void App::Execute()
 	{
+		std::cout << "Your score is:  " << m_score << std::endl;
 		if (m_state != GameState::INIT_SUCCESSFUL)
 		{
 			SDL_Log("Game INIT was not successful.");
@@ -116,7 +117,6 @@ namespace Engine
 			DestroyGameObject(*iter);
 			std::cout << "Your score is:  " << m_score << std::endl;
 
-			//m_ship->Respawn();
 		}
 	}
 
@@ -130,6 +130,7 @@ namespace Engine
 				if (m_ship->DetectCollision(currentAsteroid))
 				{
 					CreateDebris(currentAsteroid);
+					
 				}
 
 				for (std::list<Engine::Bullet *>::iterator bullet = m_bullets.begin(); bullet != m_bullets.end(); ++bullet)
@@ -255,7 +256,7 @@ namespace Engine
 			break;
 
 		case SDL_SCANCODE_P:
-			m_ship->Respawn();
+			m_ship->Restart();
 
 			break;
 

@@ -79,183 +79,66 @@ namespace Engine
 
 		GameObject::Update(m_parent, deltaTime);
 	}
+ void Ship::ChangeShip()
+    {
+		
+        m_NewShip2 = ++m_NewShip2 %2;
+        m_points.clear();
+        
+        switch (m_NewShip2)
+        {
+        case 1:
+		glBegin(GL_POLYGON);
+            glColor3f (0.0, 1.0, 0.0);
+            glVertex3f (0.25, 0.25, 0.0);
+            glVertex3f (0.75, 0.25, 0.0);
+            glColor3f (1.0, 0.0, 0.0);
+            glVertex3f (0.75, 0.75, 0.0);
+            glVertex3f (0.25, 0.75, 0.0);
+            glBegin(GL_LINE_LOOP);
+            m_points.push_back(Math::Vector2(0.0f, 16.0f));  //A
+            m_points.push_back(Math::Vector2(-2.0f, 12.0f)); //P
+            m_points.push_back(Math::Vector2(-4.0, 10.0));   //B
+            m_points.push_back(Math::Vector2(-4.0, 2.0));    //D
+            m_points.push_back(Math::Vector2(-12.0, -2.0));  //E
+            m_points.push_back(Math::Vector2(-8.0, -4.0));   //F
+            m_points.push_back(Math::Vector2(-4.0, -4.0));   //G
+            m_points.push_back(Math::Vector2(-4.0, -8.0));   //h
+            m_points.push_back(Math::Vector2(-8.0, -14.0));  //I
+            m_points.push_back(Math::Vector2(-4.0, -14.0));  //R
+            m_points.push_back(Math::Vector2(-2.0, -12.0));  //S
+            m_points.push_back(Math::Vector2(0.0, -14.0));   //T
+            m_points.push_back(Math::Vector2(2.0, -12.0));   //V
+            m_points.push_back(Math::Vector2(4.0, -14.0));   //U
+            m_points.push_back(Math::Vector2(8.0, -14.0));   //J
+            m_points.push_back(Math::Vector2(4.0, -8.0));    //K
+            m_points.push_back(Math::Vector2(4.0, -4.0));    //L
+            m_points.push_back(Math::Vector2(8.0, -4.0));    //M
+            m_points.push_back(Math::Vector2(12.0, -2.0));   //N
+            m_points.push_back(Math::Vector2(4.0, 2.0));     //O
+            m_points.push_back(Math::Vector2(4.0, 10.0));    //C
+            m_points.push_back(Math::Vector2(2.0, 12.0));    //Q
+            break;
+        default:
+		glBegin(GL_POLYGON);
+            glColor3f (0.0, 1.0, 0.0);
+            glVertex3f (0.25, 0.25, 0.0);
+            glVertex3f (0.75, 0.25, 0.0);
+            glColor3f (1.0, 0.0, 0.0);
+            glVertex3f (0.75, 0.75, 0.0);
+            glVertex3f (0.25, 0.75, 0.0);
+            glBegin(GL_LINE_LOOP);
+            m_points.push_back(Math::Vector2(0.0f, 20.0f));
+            m_points.push_back(Math::Vector2(12.0f, -10.0f));
+            m_points.push_back(Math::Vector2(6.0f, -4.0f));
+            m_points.push_back(Math::Vector2(-6.0f, -4.0f));
+            m_points.push_back(Math::Vector2(-12.0f, -10.0f));
 
-	void Ship::ChangeShip()
-	{
-
-		m_current_Ship = ++m_current_Ship % 3;
-
-		m_points.clear();
-
-		switch (m_current_Ship)
-		{
-		case 1:
-			/*
-			****** Little ship******
-								*/
-
-			m_points.push_back(Math::Vector2(0.0, 20.0));
-			m_points.push_back(Math::Vector2(12.0, -10.0));
-			m_points.push_back(Math::Vector2(6.0, -4.0));
-			m_points.push_back(Math::Vector2(-6.0, -4.0));
-			m_points.push_back(Math::Vector2(-12.0, -10.0));
-			break;
-			/*case 2:
-			m_points.push_back(Math::Vector2(0.0, 90.0));
-			m_points.push_back(Math::Vector2(3.0, 84.0));
-			m_points.push_back(Math::Vector2(9.5, 84.0));
-			m_points.push_back(Math::Vector2(12.0, 78.0));
-			m_points.push_back(Math::Vector2(12.0, 60.0));
-			m_points.push_back(Math::Vector2(60.0, 30.0));
-			m_points.push_back(Math::Vector2(60.0, 18.0));
-			m_points.push_back(Math::Vector2(12.0, 18.0));
-			m_points.push_back(Math::Vector2(7.2, 0.0));
-			m_points.push_back(Math::Vector2(0.0, 0.0));
-			m_points.push_back(Math::Vector2(-7.2, 0.0));
-			m_points.push_back(Math::Vector2(-12.0, 18.0));
-			m_points.push_back(Math::Vector2(-60.0, 18.0));
-			m_points.push_back(Math::Vector2(-60.0, 30.0));
-			m_points.push_back(Math::Vector2(-12.0, 60.0));
-			m_points.push_back(Math::Vector2(-12.0, 78.0));
-			m_points.push_back(Math::Vector2(-9.5, 84.0));
-			m_points.push_back(Math::Vector2(-3.0, 84.0));
-			m_points.push_back(Math::Vector2(0.0, 90.0));
-			break;*/
-
-		case 2:
-			//STAR WARS//
-			m_points.push_back(Math::Vector2(0.0f, 20.0f));
-			m_points.push_back(Math::Vector2(4.0f, 20.0f));
-			m_points.push_back(Math::Vector2(4.0f, 44.0f));
-			m_points.push_back(Math::Vector2(10.0f, 44.0f));
-			m_points.push_back(Math::Vector2(12.0f, 40.0f));
-			m_points.push_back(Math::Vector2(16.0f, 32.0f));
-			m_points.push_back(Math::Vector2(20.0f, 24.0f));
-			m_points.push_back(Math::Vector2(20.0f, 20.0f));
-			m_points.push_back(Math::Vector2(22.0f, 24.0f));
-			m_points.push_back(Math::Vector2(24.0f, 28.0f));
-			m_points.push_back(Math::Vector2(28.0f, 28.0f));
-			m_points.push_back(Math::Vector2(28.0f, 12.0f));
-			m_points.push_back(Math::Vector2(24.0f, 12.0f));
-			m_points.push_back(Math::Vector2(28.0f, 4.0f));
-			m_points.push_back(Math::Vector2(28.0f, -8.0f));
-			m_points.push_back(Math::Vector2(24.0f, -16.0f));
-			m_points.push_back(Math::Vector2(20.0f, -20.0f));
-			m_points.push_back(Math::Vector2(20.0f, -24.0f));
-			m_points.push_back(Math::Vector2(12.0f, -28.0f));
-			m_points.push_back(Math::Vector2(4.0f, -32.0f));
-			m_points.push_back(Math::Vector2(-4.0f, -32.0f));
-			m_points.push_back(Math::Vector2(-12.0f, -28.0f));
-			m_points.push_back(Math::Vector2(-20.0f, -24.0f));
-			m_points.push_back(Math::Vector2(-20.0f, -20.0f));
-			m_points.push_back(Math::Vector2(-24.0f, -16.0f));
-			m_points.push_back(Math::Vector2(-28.0f, -8.0f));
-			m_points.push_back(Math::Vector2(-28.0f, 4.0f));
-			m_points.push_back(Math::Vector2(-24.0f, 12.0f));
-			m_points.push_back(Math::Vector2(-20.0f, 20.0f));
-			m_points.push_back(Math::Vector2(-20.0f, 24.0f));
-			m_points.push_back(Math::Vector2(-16.0f, 32.0f));
-			m_points.push_back(Math::Vector2(-12.0f, 40.0f));
-			m_points.push_back(Math::Vector2(-10.0f, 44.0f));
-			m_points.push_back(Math::Vector2(-4.0f, 44.0f));
-			m_points.push_back(Math::Vector2(-4.0f, 20.0f));
-
-			break;
-		//STARKSTREK//
-		default:
-			m_points.push_back(Math::Vector2(0.0f, 40.0f));
-			m_points.push_back(Math::Vector2(8.0f, 40.0f));
-			m_points.push_back(Math::Vector2(12.0f, 36.0f));
-			m_points.push_back(Math::Vector2(20.0f, 28.0f));
-			m_points.push_back(Math::Vector2(22.0f, 24.0f));
-			m_points.push_back(Math::Vector2(24.0f, 20.0f));
-			m_points.push_back(Math::Vector2(24.0f, 16.0f));
-			m_points.push_back(Math::Vector2(20.0f, 8.0f));
-			m_points.push_back(Math::Vector2(16.0f, 0.0f));
-			m_points.push_back(Math::Vector2(12.0f, -4.0f));
-			m_points.push_back(Math::Vector2(12.0f, -12.0f));
-			m_points.push_back(Math::Vector2(18.0f, -16.0f));
-			m_points.push_back(Math::Vector2(18.0f, -4.0f));
-			m_points.push_back(Math::Vector2(24.0f, -4.0f));
-			m_points.push_back(Math::Vector2(24.0f, -40.0f));
-			m_points.push_back(Math::Vector2(18.0f, -40.0f));
-			m_points.push_back(Math::Vector2(18.0f, -24.0f));
-			m_points.push_back(Math::Vector2(12.0f, -20.0f));
-			m_points.push_back(Math::Vector2(4.0f, -14.0f));
-			m_points.push_back(Math::Vector2(-4.0f, -14.0f));
-			m_points.push_back(Math::Vector2(-12.0f, -20.0f));
-			m_points.push_back(Math::Vector2(-18.0f, -24.0f));
-			m_points.push_back(Math::Vector2(-18.0f, -40.0f));
-			m_points.push_back(Math::Vector2(-24.0f, -40.0f));
-			m_points.push_back(Math::Vector2(-24.0f, -4.0f));
-			m_points.push_back(Math::Vector2(-18.0f, -4.0f));
-			m_points.push_back(Math::Vector2(-18.0f, -16.0f));
-			m_points.push_back(Math::Vector2(-12.0f, -12.0f));
-			m_points.push_back(Math::Vector2(-12.0f, -4.0f));
-			m_points.push_back(Math::Vector2(-16.0f, 0.0f));
-			m_points.push_back(Math::Vector2(-20.0f, 8.0f));
-			m_points.push_back(Math::Vector2(-24.0f, 16.0f));
-			m_points.push_back(Math::Vector2(-24.0f, 20.0f));
-			m_points.push_back(Math::Vector2(-22.0f, 24.0f));
-			m_points.push_back(Math::Vector2(-20.0f, 28.0f));
-			m_points.push_back(Math::Vector2(-12.0f, 36.0f));
-			m_points.push_back(Math::Vector2(-8.0f, 40.0f));
-			break;
-
-			//default:
-			/* ===========BIG SHIP============*/
-
-			/*	m_points.push_back(Math::Vector2(0.0, 150.0));
-			m_points.push_back(Math::Vector2(2.5, 145.0));
-			m_points.push_back(Math::Vector2(7.5, 145.0));
-			m_points.push_back(Math::Vector2(12.5, 135.0));
-			m_points.push_back(Math::Vector2(25.0, 125.0));
-			m_points.push_back(Math::Vector2(25.0, 120.0));
-			m_points.push_back(Math::Vector2(12.5, 125.0));
-			m_points.push_back(Math::Vector2(12.5, 120.0));
-			m_points.push_back(Math::Vector2(12.5, 115.0));
-			m_points.push_back(Math::Vector2(17.5, 110.0));
-			m_points.push_back(Math::Vector2(17.5, 110.5));
-			m_points.push_back(Math::Vector2(17.5, 115.0));
-			m_points.push_back(Math::Vector2(20.0, 115.5));
-			m_points.push_back(Math::Vector2(22.5, 115.0));
-			m_points.push_back(Math::Vector2(22.5, 110.5));
-			m_points.push_back(Math::Vector2(22.5, 110.0));
-			m_points.push_back(Math::Vector2(22.5, 105.5));
-			m_points.push_back(Math::Vector2(25.0, 105.0));
-			m_points.push_back(Math::Vector2(25.0, 100.0));
-			m_points.push_back(Math::Vector2(5.0, 100.0));
-			m_points.push_back(Math::Vector2(3.0, 95.0));
-			m_points.push_back(Math::Vector2(0.0, 95.0));
-			m_points.push_back(Math::Vector2(-3.0, 95.0));
-			m_points.push_back(Math::Vector2(-5.0, 100.0));
-			m_points.push_back(Math::Vector2(-25.0, 100.0));
-			m_points.push_back(Math::Vector2(-25.0, 105.0));
-			m_points.push_back(Math::Vector2(-22.5, 105.5));
-			m_points.push_back(Math::Vector2(-22.5, 110.0));
-			m_points.push_back(Math::Vector2(-22.5, 110.5));
-			m_points.push_back(Math::Vector2(-22.5, 115.0));
-			m_points.push_back(Math::Vector2(-20.0, 115.5));
-			m_points.push_back(Math::Vector2(-17.5, 115.0));
-			m_points.push_back(Math::Vector2(-17.5, 110.5));
-			m_points.push_back(Math::Vector2(-17.5, 110.0));
-			m_points.push_back(Math::Vector2(-12.5, 115.0));
-			m_points.push_back(Math::Vector2(-12.5, 120.0));
-			m_points.push_back(Math::Vector2(-12.5, 125.0));
-			m_points.push_back(Math::Vector2(-25.0, 120.0));
-			m_points.push_back(Math::Vector2(-25.0, 125.0));
-			m_points.push_back(Math::Vector2(-12.5, 135.0));
-			m_points.push_back(Math::Vector2(-7.5, 145.0));
-			m_points.push_back(Math::Vector2(-2.5, 145.0));
-			m_points.push_back(Math::Vector2(0.0, 145.0));
-			m_points.push_back(Math::Vector2(2.5, 145.0));
-			m_points.push_back(Math::Vector2(-2.5, 145.0));
-			m_points.push_back(Math::Vector2(0.0, 150.0));
-			break;*/
-		}
-	}
-
-	void Ship::Respawn()
+            break;
+        }
+     } //Switch.
+	
+	void Ship::Restart()
 	{
 		glLoadIdentity();
 		m_position.x = 0.0f;
