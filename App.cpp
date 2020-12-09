@@ -130,6 +130,7 @@ namespace Engine
 				if (m_ship->DetectCollision(currentAsteroid))
 				{
 					CreateDebris(currentAsteroid);
+					m_ship->Restart();
 					
 				}
 
