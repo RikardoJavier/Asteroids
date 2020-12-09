@@ -33,13 +33,8 @@ namespace Engine
 		m_lastFrameTime = m_timer->GetElapsedTimeInSeconds();
 
 		m_ship = new Engine::Ship(this);
-<<<<<<< HEAD
 		m_dimensions[0] = m_width;
 		m_dimensions[1] = m_height;
-=======
-		m_asteroid = new Engine::Asteroid(this);
-		
->>>>>>> Development
 	}
 
 	App::~App()
@@ -51,12 +46,6 @@ namespace Engine
 
 		// Removes ship allocation
 		delete m_ship;
-<<<<<<< HEAD
-=======
-
-		// Removes asteroid
-		 delete m_asteroid;
->>>>>>> Development
 	}
 
 	void App::Execute()
@@ -141,7 +130,6 @@ namespace Engine
 				if (m_ship->DetectCollision(currentAsteroid))
 				{
 					CreateDebris(currentAsteroid);
-					m_ship->Restart();
 					
 				}
 
@@ -312,7 +300,6 @@ namespace Engine
 		// Update code goes here
 		//
 		m_ship->Update(DESIRED_FRAME_TIME);
-		m_asteroid->Update(DESIRED_FRAME_TIME);
 
 		std::list<Engine::Asteroid *>::iterator obj = m_asteroids.begin();
 		while (obj != m_asteroids.end())
@@ -347,11 +334,10 @@ namespace Engine
 
 	void App::Render()
 	{
-		glClearColor(0.0f, 0.0f, 0.3f, 1.0f);
+		glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		
+
 		// Render code goes here
-<<<<<<< HEAD
 		if (m_ship->CouldCollide())
 			m_ship->Render();
 
@@ -374,12 +360,6 @@ namespace Engine
 			++bull;
 		}
 
-=======
-		m_ship->Render();
-		m_asteroid->Render();
-		
-		
->>>>>>> Development
 		SDL_GL_SwapWindow(m_mainWindow);
 	}
 
