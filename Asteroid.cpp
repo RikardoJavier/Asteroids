@@ -87,6 +87,8 @@ namespace Engine
         float sizeFactor = 1;
         float min = MIN_SIZE / sizeFactor;
         float max = MAX_SIZE / sizeFactor;
+        float x = randInRange(-100.0f , 150.0f);
+        float y = randInRange(-40.0f , 150.0f);
         
          glLoadIdentity();
         glTranslatef(m_position.x, m_position.y, 0.f);
@@ -101,17 +103,19 @@ namespace Engine
         glEnd();
         do
         {
-            float x = randInRange(-150.0f , 150.0f);
-            float y = randInRange(-150.0f , 150.0f);
+            
               for(size_t idx = 0; idx < NUM_POINTS; ++idx)
             {
+                
                 const float radians = (idx / static_cast<float>(NUM_POINTS)) * 2.0f * Engine::Math::Vector2::PI;
                 const float randDist = randInRange(min,max);//min + (max - min) * (rand() / static_cast<float>(RAND_MAX));
 
                  m_points.push_back(Engine::Math::Vector2(sinf(radians) * randDist,
                                                          cosf(radians) * randDist)); 
+                                                         
             }
+           
             i++;
-        } while (i<15);
+        } while (i<1);
     }
 }
