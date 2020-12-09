@@ -8,18 +8,20 @@
 
 // Asteroids
 #include "Vector2.hpp"
+#include "GameObject.hpp"
 
 namespace Engine
 {
     class App;
-    class Ship
+    class Bullet;
+    class Ship : public GameObject
     {
     public:
         /* ==========================
         * CONSTRUCTORS
         * ==========================*/
-        Ship(App* parent);
-        Ship(App* parent, float, float);
+        Ship(App *parent);
+        Ship(App *parent, float, float);
         ~Ship();
         /* ==========================
         * PUBLIC FUNCTIONS
@@ -29,28 +31,24 @@ namespace Engine
         void RotateLeft(float deltaTime);
         void RotateRight(float deltaTime);
         void Update(float deltaTime);
-        void Render();
+        // void Render();
         void Restart();
+        Bullet *Shoot();
 
     private:
         /* ==========================
         * PRIVATE FUNCTIONS
         * ==========================*/
-        void ApplyImpulse(Math::Vector2 impulse);
+        //void ApplyImpulse(Math::Vector2 impulse);
         void ApplyDrag(Math::Vector2 force);
         /* ==========================
         * MEMBERS
         * ==========================*/
-        std::vector<Engine::Math::Vector2> m_points;
-        Engine::Math::Vector2 m_position;
-        Engine::Math::Vector2 m_velocity;
-        float m_angle;
-        float m_mass;
-        float m_rotation;
         float m_currentSpeed;
+        App *m_parent;
         int m_NewShip2;
-        
-        App* m_parent;
+        int m_ship;
+        //  Engine::Math::Vector2
     };
 } // namespace Engine
 #endif
