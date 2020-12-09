@@ -1,15 +1,18 @@
+
 #include "SDLEvents.hpp"
 
 namespace Engine
 {
+
+    //constructor / destructor of the SDLEvent
     SDLEvent::SDLEvent()
     {
     }
-
     SDLEvent::~SDLEvent()
     {
     }
 
+    //function
     void SDLEvent::OnEvent(SDL_Event *event)
     {
         switch (event->type)
@@ -44,77 +47,75 @@ namespace Engine
         case SDL_SYSWMEVENT:
             //Ignore
             break;
+
         default:
             OnUser(event->user.type, event->user.code, event->user.data1, event->user.data2);
             break;
         }
     }
-
-    void SDLEvent::HandleWindowEvents(SDL_Event* event)
-	{
-		switch (event->window.event)
-		{
-		case SDL_WINDOWEVENT_ENTER:
-			OnMouseFocus();
-			break;
-		case SDL_WINDOWEVENT_LEAVE:
-			OnMouseBlur();
-			break;
-		case SDL_WINDOWEVENT_FOCUS_GAINED:
-			OnInputFocus();
-			break;
-		case SDL_WINDOWEVENT_FOCUS_LOST:
-			OnInputBlur();
-			break;
-		case SDL_WINDOWEVENT_RESTORED:
-			OnRestore();
-			break;
-		case SDL_WINDOWEVENT_MINIMIZED:
-			OnMinimize();
-			break;
-		case SDL_WINDOWEVENT_RESIZED:
-			OnResize(event->window.data1, event->window.data2);
-			break;
-		case SDL_WINDOWEVENT_CLOSE:
-			OnExit();
-			break;
-		case SDL_WINDOWEVENT_EXPOSED:
-			OnExpose();
-			break;
-		default:
-			break;
-		}
-	}
-
-	void SDLEvent::HandleMouseButtonDownEvents(SDL_Event* event)
-	{
-		switch (event->button.button)
-		{
-		case SDL_BUTTON_LEFT:
-			OnLButtonDown(event->button.x, event->button.y);
-			break;
-		case SDL_BUTTON_RIGHT:
-			OnRButtonDown(event->button.x, event->button.y);
-			break;
-		case SDL_BUTTON_MIDDLE:
-			OnMButtonDown(event->button.x, event->button.y);
-			break;
-		}
-	}
-
-	void SDLEvent::HandleMouseButtonUpEvents(SDL_Event* event)
-	{
-		switch (event->button.button)
-		{
-		case SDL_BUTTON_LEFT:
-			OnLButtonUp(event->button.x, event->button.y);
-			break;
-		case SDL_BUTTON_RIGHT:
-			OnRButtonUp(event->button.x, event->button.y);
-			break;
-		case SDL_BUTTON_MIDDLE:
-			OnMButtonUp(event->button.x, event->button.y);
-			break;
-		}
-	}
+    void SDLEvent::HandleWindowEvents(SDL_Event *event)
+    {
+        switch (event->window.event)
+        {
+        case SDL_WINDOWEVENT_ENTER:
+            OnMouseFocus();
+            break;
+        case SDL_WINDOWEVENT_LEAVE:
+            OnMouseBlur();
+            break;
+        case SDL_WINDOWEVENT_FOCUS_GAINED:
+            OnInputFocus();
+            break;
+        case SDL_WINDOWEVENT_FOCUS_LOST:
+            OnInputBlur();
+            break;
+        case SDL_WINDOWEVENT_RESTORED:
+            OnRestore();
+            break;
+        case SDL_WINDOWEVENT_MINIMIZED:
+            OnMinimize();
+            break;
+        case SDL_WINDOWEVENT_RESIZED:
+            OnResize(event->window.data1, event->window.data2);
+            break;
+        case SDL_WINDOWEVENT_CLOSE:
+            OnExit();
+            break;
+        case SDL_WINDOWEVENT_EXPOSED:
+            OnExpose();
+            break;
+        default:
+            break;
+        }
+    }
+    void SDLEvent::HandleMouseButtonDownEvents(SDL_Event *event)
+    {
+        switch (event->button.button)
+        {
+        case SDL_BUTTON_LEFT:
+            OnLButtonDown(event->button.x, event->button.y);
+            break;
+        case SDL_BUTTON_RIGHT:
+            OnRButtonDown(event->button.x, event->button.y);
+            break;
+        case SDL_BUTTON_MIDDLE:
+            OnMButtonDown(event->button.x, event->button.y);
+            break;
+        }
+    }
+    void SDLEvent::HandleMouseButtonUpEvents(SDL_Event *event)
+    {
+        switch (event->button.button)
+        {
+        case SDL_BUTTON_LEFT:
+            OnLButtonUp(event->button.x, event->button.y);
+            break;
+        case SDL_BUTTON_RIGHT:
+            OnRButtonUp(event->button.x, event->button.y);
+            break;
+        case SDL_BUTTON_MIDDLE:
+            OnMButtonUp(event->button.x, event->button.y);
+            break;
+        }
+    }
 } // namespace Engine
